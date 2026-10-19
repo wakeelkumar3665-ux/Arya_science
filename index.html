@@ -1,0 +1,422 @@
+Website 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARYA SCIENCE | Explore the Universe</title>
+
+<style>
+:root {
+  --bg: #041225;
+  --panel: #0b203b;
+  --card: #102b4b;
+  --blue: #08c8ff;
+  --text: #f3f8ff;
+  --muted: #b6c9df;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+a { color: inherit; text-decoration: none; }
+header {
+  background: #06172b;
+  border-bottom: 1px solid #17466b;
+  padding: 14px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.brand { font-size: 23px; font-weight: bold; }
+.brand span, .accent { color: var(--blue); }
+.tagline { color: var(--muted); font-size: 12px; }
+nav { display: flex; gap: 18px; flex-wrap: wrap; }
+nav a { font-size: 14px; }
+nav a:hover { color: var(--blue); }
+
+.hero {
+  padding: 55px 6%;
+  background:
+    linear-gradient(90deg, #041225 10%, #041225bb 65%, #04122566),
+    url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1400")
+    center/cover;
+}
+.hero h1 {
+  font-size: clamp(32px, 6vw, 56px);
+  line-height: 1.15;
+  margin: 8px 0;
+}
+.hero p { color: var(--muted); max-width: 500px; }
+.search {
+  display: flex;
+  max-width: 620px;
+  margin-top: 25px;
+  gap: 8px;
+}
+input, button { font: inherit; }
+.search input {
+  flex: 1;
+  min-width: 0;
+  padding: 13px;
+  border-radius: 10px;
+  border: 1px solid #47718f;
+  background: #f5f9ff;
+  color: #07172b;
+}
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 17px;
+  background: var(--blue);
+  color: #031426;
+  font-weight: bold;
+}
+button:hover { filter: brightness(1.12); }
+
+main { padding: 28px 5%; }
+.section-title {
+  font-size: 25px;
+  margin: 12px 0 18px;
+}
+.categories {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+.category {
+  background: var(--panel);
+  border: 1px solid #19486b;
+  border-radius: 13px;
+  padding: 20px 12px;
+  text-align: center;
+  color: var(--text);
+}
+.category.active, .category:hover {
+  border-color: var(--blue);
+  box-shadow: 0 0 14px #08c8ff30;
+}
+.category strong { display: block; }
+.category small { color: var(--muted); }
+
+.content-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2.5fr) minmax(230px, 1fr);
+  gap: 22px;
+  margin-top: 35px;
+}
+.articles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.article {
+  background: var(--panel);
+  border: 1px solid #19486b;
+  border-radius: 13px;
+  overflow: hidden;
+  transition: transform .2s;
+}
+.article:hover { transform: translateY(-3px); }
+.article img {
+  display: block;
+  width: 100%;
+  height: 165px;
+  object-fit: cover;
+}
+.article-body { padding: 15px; }
+.badge {
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.article h3 { margin: 5px 0; font-size: 19px; }
+.article p { color: var(--muted); font-size: 14px; }
+.read-more {
+  display: inline-block;
+  color: var(--blue);
+  font-weight: bold;
+  margin-top: 5px;
+}
+.sidebar {
+  background: var(--panel);
+  border: 1px solid #19486b;
+  border-radius: 13px;
+  padding: 18px;
+  align-self: start;
+}
+.fact {
+  padding: 12px 0;
+  border-bottom: 1px solid #21405d;
+}
+.fact:last-child { border-bottom: 0; }
+.fact strong { color: var(--blue); }
+#noResults {
+  display: none;
+  color: #ffcc80;
+  padding: 20px 0;
+}
+footer {
+  margin-top: 35px;
+  padding: 28px 5%;
+  border-top: 1px solid #19486b;
+  background: #06172b;
+  color: var(--muted);
+  text-align: center;
+}
+footer a { color: var(--blue); margin: 0 8px; }
+footer p { margin: 7px 0; font-size: 13px; }
+
+@media (max-width: 760px) {
+  header { align-items: flex-start; }
+  nav { gap: 12px; }
+  .hero { padding: 38px 5%; }
+  .categories { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .content-layout { grid-template-columns: 1fr; }
+  .articles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .article img { height: 125px; }
+}
+@media (max-width: 420px) {
+  .articles { grid-template-columns: 1fr; }
+  .search { flex-wrap: wrap; }
+  .search input { width: 100%; flex-basis: 100%; }
+  nav { gap: 10px; }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div>
+    <div class="brand">⚛ ARYA <span>SCIENCE</span></div>
+    <div class="tagline">Explore the Universe!</div>
+  </div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#categories">Categories</a>
+    <a href="#articles">Articles</a>
+    <a href="#facts">Quick Facts</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <p class="accent">DISCOVER • LEARN • EXPLORE</p>
+  <h1>Unlock the Secrets<br>of the <span class="accent">Universe.</span></h1>
+  <p>Explore amazing space discoveries, science facts and fascinating knowledge about our world.</p>
+  <div class="search">
+    <input id="searchBox" type="search"
+      placeholder="Search Earth, Galaxy, Science..."
+      aria-label="Search articles">
+    <button id="searchButton">Search</button>
+  </div>
+</section>
+
+<main>
+  <section id="categories">
+    <h2 class="section-title">Explore Categories</h2>
+    <div class="categories">
+      <button class="category active" data-category="all">
+        <strong>🌌 All Topics</strong><small>Explore everything</small>
+      </button>
+      <button class="category" data-category="space">
+        <strong>🚀 Space</strong><small>Stars and planets</small>
+      </button>
+      <button class="category" data-category="science">
+        <strong>⚛️ Science</strong><small>How things work</small>
+      </button>
+      <button class="category" data-category="world">
+        <strong>🌍 World</strong><small>Our amazing planet</small>
+      </button>
+    </div>
+  </section>
+
+  <div class="content-layout">
+    <section id="articles">
+      <h2 class="section-title">✨ Featured Articles</h2>
+      <div class="articles" id="articleGrid">
+
+        <article class="article" data-category="space">
+          <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=700"
+            alt="Earth seen from space" loading="lazy">
+          <div class="article-body">
+            <span class="badge">Space</span>
+            <h3>Our Beautiful Earth</h3>
+            <p>Earth is our home planet, with oceans, continents and a life-supporting atmosphere.</p>
+            <a class="read-more" href="#facts">Explore facts →</a>
+          </div>
+        </article>
+
+        <article class="article" data-category="space">
+          <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=700"
+            alt="A colorful nebula in space" loading="lazy">
+          <div class="article-body">
+            <span class="badge">Space</span>
+            <h3>What Is a Galaxy?</h3>
+            <p>A galaxy contains stars, gas, dust and dark matter held together by gravity.</p>
+            <a class="read-more" href="#facts">Explore facts →</a>
+          </div>
+        </article>
+
+        <article class="article" data-category="science">
+          <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=700"
+            alt="Scientific laboratory equipment" loading="lazy">
+          <div class="article-body">
+            <span class="badge">Science</span>
+            <h3>The Power of Science</h3>
+            <p>Scientists ask questions, test ideas and use evidence to understand nature.</p>
+            <a class="read-more" href="#facts">Explore facts →</a>
+          </div>
+        </article>
+
+        <article class="article" data-category="science">
+          <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=700"
+            alt="Scientific study of the human brain" loading="lazy">
+          <div class="article-body">
+            <span class="badge">Science</span>
+            <h3>Amazing Human Brain</h3>
+            <p>Your brain helps you think, learn, remember and understand the world.</p>
+            <a class="read-more" href="#facts">Explore facts →</a>
+          </div>
+        </article>
+
+        <article class="article" data-category="world">
+          <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=700"
+            alt="Green mountains and mist" loading="lazy">
+          <div class="article-body">
+            <span class="badge">World</span>
+            <h3>Nature's Wonders</h3>
+            <p>Earth's landscapes include mountains, forests, deserts and amazing ecosystems.</p>
+            <a class="read-more" href="#facts">Explore facts →</a>
+          </div>
+        </article>
+
+        <article class="article" data-category="space">
+          <img src="https://images.unsplash.com/photo-1447433819943-74a20887a81d?w=700"
+            alt="Planet and stars in space" loading="lazy">
+          <div class="article-body">
+            <span class="badge">Space</span>
+            <h3>Exploring the Cosmos</h3>
+            <p>Telescopes help us observe distant planets, stars and galaxies.</p>
+            <a class="read-more" href="#facts">Explore facts →</a>
+          </div>
+        </article>
+      </div>
+      <p id="noResults">No matching articles found. Try another search!</p>
+    </section>
+
+    <aside class="sidebar" id="facts">
+      <h2>🚀 Quick Facts</h2>
+      <div class="fact">
+        <strong>☀️ Sunlight</strong>
+        <p>Sunlight takes about 8 minutes and 20 seconds to reach Earth.</p>
+      </div>
+      <div class="fact">
+        <strong>🌍 Earth</strong>
+        <p>Earth is the only planet currently known to support life.</p>
+      </div>
+      <div class="fact">
+        <strong>🌌 The Universe</strong>
+        <p>The observable universe contains an enormous number of galaxies.</p>
+      </div>
+      <div class="fact">
+        <strong>🌊 Our Oceans</strong>
+        <p>Oceans cover about 71% of Earth's surface.</p>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer>
+  <div class="brand">⚛ ARYA <span>SCIENCE</span></div>
+  <p>Curiosity opens the door to discovery.</p>
+  <p>
+    <a href="#home">Home</a>
+    <a href="#categories">Categories</a>
+    <a href="#articles">Articles</a>
+    <a href="#facts">Quick Facts</a>
+  </p>
+  <p>© <span id="year"></span> Arya Science. Keep learning!</p>
+</footer>
+
+<script>
+const searchBox = document.getElementById("searchBox");
+const searchButton = document.getElementById("searchButton");
+const articles = document.querySelectorAll(".article");
+const categoryButtons = document.querySelectorAll(".category");
+const noResults = document.getElementById("noResults");
+
+let selectedCategory = "all";
+
+function filterArticles() {
+  const query = searchBox.value.toLowerCase().trim();
+  let visibleCount = 0;
+
+  articles.forEach(function(article) {
+    const text = article.innerText.toLowerCase();
+    const category = article.dataset.category;
+
+    const matchesText = text.includes(query);
+    const matchesCategory =
+      selectedCategory === "all" ||
+      category === selectedCategory;
+
+    if (matchesText && matchesCategory) {
+      article.style.display = "";
+      visibleCount++;
+    } else {
+      article.style.display = "none";
+    }
+  });
+
+  noResults.style.display = visibleCount === 0 ? "block" : "none";
+}
+
+searchBox.addEventListener("input", filterArticles);
+
+searchButton.addEventListener("click", function() {
+  filterArticles();
+  document.getElementById("articles").scrollIntoView({
+    behavior: "smooth"
+  });
+});
+
+searchBox.addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    filterArticles();
+    document.getElementById("articles").scrollIntoView({
+      behavior: "smooth"
+    });
+  }
+});
+
+categoryButtons.forEach(function(button) {
+  button.addEventListener("click", function() {
+    selectedCategory = button.dataset.category;
+
+    categoryButtons.forEach(function(item) {
+      item.classList.remove("active");
+    });
+
+    button.classList.add("active");
+    filterArticles();
+    document.getElementById("articles").scrollIntoView({
+      behavior: "smooth"
+    });
+  });
+});
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+</script>
+</body>
+</html>
